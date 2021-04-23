@@ -28,3 +28,17 @@
     justify-content: center;
     display: flex;
 }
+
+.Display {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 1;
+  }
+
+.Box {
+    height: 40px;
+    width: 300px;
+    background-color: cornsilk;
+    margin-top: 10px;
+}
