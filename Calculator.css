@@ -1,0 +1,23 @@
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 70%;
+    justify-content: center;
+    margin-top: 5%;
+    background-color: blue;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.button {
+    background-color: black;
+    color: white;
+}
