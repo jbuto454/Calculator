@@ -110,6 +110,11 @@ function addToArray(input) {
 	&& displayScreen.textContent !== "/") {
 		currentInputs[currentInputs.length - 1] = displayScreen.textContent + input;
 		console.log(currentInputs);
+	} else if ((input === "x" || input === "=" || input === "/" 
+	|| input === "+" || input === "-") && (currentInputs[currentInputs.length - 1] === "x" || 
+	currentInputs[currentInputs.length - 1] === "=" || currentInputs[currentInputs.length - 1] === "-" 
+	|| currentInputs[currentInputs.length - 1] === "/" || currentInputs[currentInputs.length - 1] === "+")) {
+		currentInputs[currentInputs.length - 1] = input;
 	} else {
 		currentInputs.push(input);
 		console.log(currentInputs);
@@ -120,6 +125,10 @@ function addToArray(input) {
 function clearArray(input) {
 	currentInputs = [0];
 	console.log(currentInputs);
+}
+
+function Calculate(array) {
+
 }
 
 
