@@ -1,13 +1,13 @@
 
 //takes 2 numbers and adds them
 function add (a,b) {
-	let solution = a + b;
+	let solution = parseInt(a) + parseInt(b);
 	return (solution);
 }
 
 //takes 2 numbers and subtracts them
 function subtract (a,b) {
-	let solution = a - b;
+	let solution = parseInt(a) - parseInt(b);
 	return (solution);
 }
 
@@ -84,6 +84,12 @@ function changeDisplay(button) {
 	&& displayScreen.textContent !== "-" && displayScreen.textContent !== "+"
 	&& displayScreen.textContent !== "/") {
 		displayScreen.textContent += button;
+	} else if ((button === "x" || button === "=" || button === "/" 
+	|| button === "+" || button === "-") && (currentInputs[1] === "x" || 
+	currentInputs[1] === "=" || currentInputs[1] === "-" 
+	|| currentInputs[1] === "/" || currentInputs[1] === "+") && (currentInputs.length >= 3)) {
+		displayScreen.textContent = operate(currentInputs[0],currentInputs[2],currentInputs[1]);
+		console.log(operate(currentInputs[0],currentInputs[2],currentInputs[1]));
 	} else if (typeof(button) !== 'number') {
 		displayScreen.textContent = button;
 	} else {
@@ -121,14 +127,25 @@ function addToArray(input) {
 	}
 }
 
+//puts the solution to the previous math problem in the first slot of the currentInputs array
+//and deletes the 2nd and 3rd slots, effectivley starting a fresh array
+function suffleArray(input) {
+	if ((input === "x" || input === "=" || input === "/" 
+	|| input === "+" || input === "-") && (currentInputs[1] === "x" || 
+	currentInputs[1] === "=" || currentInputs[1] === "-" 
+	|| currentInputs[1] === "/" || currentInputs[1] === "+") && (currentInputs.length >= 3)) {
+		currentInputs[0] = displayScreen.textContent;
+		currentInputs.splice(1);
+		currentInputs.splice(2);
+		console.log(currentInputs);
+	}
+}
+
+
 //clears the array back to only containing 0
 function clearArray(input) {
 	currentInputs = [0];
 	console.log(currentInputs);
-}
-
-function Calculate(array) {
-
 }
 
 
@@ -165,20 +182,20 @@ const btn0 = document.querySelector("#btn0");
 btn0.addEventListener('click', function() {addToArray(0);changeDisplay(0);});
 
 const Equal = document.querySelector("#Equal");
-Equal.addEventListener('click', function() {addToArray("=");changeDisplay("=");});
+Equal.addEventListener('click', function() {addToArray("=");changeDisplay("=");suffleArray("=")});
 
 const clear = document.querySelector("#clear");
 clear.addEventListener('click', function() {clearArray();clearDisplay();});
 
 const Subtract = document.querySelector("#Subtract");
-Subtract.addEventListener('click', function() {addToArray("-");changeDisplay("-");});
+Subtract.addEventListener('click', function() {addToArray("-");changeDisplay("-");suffleArray("-")});
 
 const Add = document.querySelector("#Add");
-Add.addEventListener('click', function() {addToArray("+");changeDisplay("+");});
+Add.addEventListener('click', function() {addToArray("+");changeDisplay("+");suffleArray("+")});
 
 const Divide = document.querySelector("#Divide");
-Divide.addEventListener('click', function() {addToArray("/");changeDisplay("/");});
+Divide.addEventListener('click', function() {addToArray("/");changeDisplay("/");suffleArray("/")});
 
 const Multiply = document.querySelector("#Multiply");
-Multiply.addEventListener('click', function() {addToArray("x");changeDisplay("x");});
+Multiply.addEventListener('click', function() {addToArray("x");changeDisplay("x");suffleArray("x")});
 
