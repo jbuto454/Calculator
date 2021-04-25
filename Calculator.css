@@ -4,11 +4,13 @@
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    width: 40%;
-    height: 70%;
+    width: 350px;
+    height: 500px;
     justify-content: center;
     margin-top: 5%;
-    background-color: blue;
+    background-color: rgb(3, 3, 153);
+    border-radius: 10px;
+    border:solid;
 }
 
 .container {
@@ -20,8 +22,20 @@
 .button {
     background-color: black;
     color: white;
-    height: 40px;
-    width: 70px;
+    height: 60px;
+    width: 90px;
+    border-radius: 5px;
+    margin-top: 2px;
+}
+
+.button2 {
+    background-color: rgb(241, 238, 238);
+    color: white;
+    height: 60px;
+    width: 90px;
+    color: black;
+    border-radius: 5px;
+    margin-top: 2px;
 }
 
 .divs {
@@ -37,17 +51,36 @@
   }
 
 .Box {
-    height: 40px;
-    width: 200px;
-    background-color: cornsilk;
+    height: 50px;
+    width: 175px;
+    background-color: rgb(192, 192, 192);
     margin-top: 10px;
     font-size: 35px;
+    border-radius: 5px;
+    border-color: black;
+    border-radius: 5px;
+    border: solid;
+    border-width: 2px;
 }
 
 .Box2 {
     height: 40px;
+    width: 140px;
     border-color: black;
-    background-color:cornsilk;
+    background-color:  rgb(192, 192, 192);
     margin-top: 10px;
     margin-right: 10px;
+    border-radius: 5px;
+    font-size: 35px;
+    border-color: black;
+    border-radius: 5px;
+    border: solid;
+    border-width: 2px;
+}
+
+.head {
+    justify-content: center;
+    display: flex;
+    font-size: 50px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
