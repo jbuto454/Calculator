@@ -147,10 +147,10 @@ function addToArray(input) {
 	if ((typeof input == 'number' || input == "." ) && (displayScreen.textContent !== "x" 
 	&& displayScreen.textContent !== "=" && 
 	displayScreen.textContent !== "-" && displayScreen.textContent !== "+"
-	&& displayScreen.textContent !== "/" )) {
+	&& displayScreen.textContent !== "/" && displayScreen.textContent.length !== 0)) {
 		currentInputs[currentInputs.length - 1] = displayScreen.textContent + input;
 		console.log(currentInputs);
-		console.log("maybe");
+		console.log("1");
 
 	//After a user has entered the "="" key and is shown a solution to the math problem
 	//If the user enters a number, I am assuming that they want to start a new 
@@ -159,6 +159,7 @@ function addToArray(input) {
 	} else if (typeof input == 'number' && displayScreen.textContent == "=") {
 		clearArray();
 		currentInputs[0] = input;
+		console.log("2");
 
 	//When the user enters an operator and the last value they entered was an operator as well
 	//I am assuming that the user wants to undo the previous operator and 
@@ -169,7 +170,7 @@ function addToArray(input) {
 	currentInputs[currentInputs.length - 1] === "=" || currentInputs[currentInputs.length - 1] === "-" 
 	|| currentInputs[currentInputs.length - 1] === "/" || currentInputs[currentInputs.length - 1] === "+")) {
 		currentInputs[currentInputs.length - 1] = input;
-		console.log("after the =");
+		console.log("3");
 
 
 	//In all other cases (if a user enters a number after entering an operator or
@@ -179,11 +180,11 @@ function addToArray(input) {
 		if (typeof input == 'number') {
 			currentInputs.push(input.toString());
 			console.log(currentInputs);
-			console.log("this is a number");
+			console.log("4");
 		} else {
 		currentInputs.push(input);
 		console.log(currentInputs);
-		console.log("want");
+		console.log("5");
 		}
 	}
 }
