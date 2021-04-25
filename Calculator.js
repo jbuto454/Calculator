@@ -76,23 +76,29 @@ let displayScreen = document.querySelector("#Display");
 let initialDisplay = 0;
 displayScreen.textContent = initialDisplay;
 
+let displayScreen2 = document.querySelector("#Display2");
+let initialDisplay2 = ""
+
 //changes the display when a button is pushed
 function changeDisplay(button) {
 	console.log(typeof(button));
 	if (displayScreen.textContent !== "0" && typeof(button) === 'number' 
 	&& displayScreen.textContent !== "x" && displayScreen.textContent !== "="
 	&& displayScreen.textContent !== "-" && displayScreen.textContent !== "+"
-	&& displayScreen.textContent !== "/" && (currentInputs[1] !== "x" && 
-	currentInputs[1] !== "-" && currentInputs[1] !== "+" && currentInputs[1] !== "/")) {
+	&& displayScreen.textContent !== "/" ) {
 		displayScreen.textContent += button;
+
 	} else if ((button === "x" || button === "=" || button === "/" 
 	|| button === "+" || button === "-") && (currentInputs[1] === "x" || 
 	currentInputs[1] === "=" || currentInputs[1] === "-" 
 	|| currentInputs[1] === "/" || currentInputs[1] === "+") && (currentInputs.length >= 3)) {
-		displayScreen.textContent = operate(currentInputs[0],currentInputs[2],currentInputs[1]);
+		displayScreen2.textContent = operate(currentInputs[0],currentInputs[2],currentInputs[1]);
 		console.log(operate(currentInputs[0],currentInputs[2],currentInputs[1]));
+		displayScreen.textContent = button;
+
 	} else if (typeof(button) !== 'number') {
 		displayScreen.textContent = button;
+
 	} else {
 		displayScreen.textContent = button;
 	}
@@ -101,6 +107,7 @@ function changeDisplay(button) {
 //clears the display so its back to its intial value
 function clearDisplay(button) {
 	displayScreen.textContent = initialDisplay;
+	displayScreen2.textContent = initialDisplay2;
 }
 
 //creates a empty array to store values in to operate on
@@ -111,19 +118,25 @@ function addToArray(input) {
 	console.log(input);
 	console.log(typeof(input));
 	console.log(displayScreen.textContent);
+
 	if (typeof input == 'number' && displayScreen.textContent !== "x" 
-	&& displayScreen.textContent !== "="
-	&& displayScreen.textContent !== "-" && displayScreen.textContent !== "+"
-	&& displayScreen.textContent !== "/" && (currentInputs[1] !== "x" && 
-	currentInputs[1] !== "-" && currentInputs[1] !== "+" && currentInputs[1] !== "/")) {
+	&& displayScreen.textContent !== "=" && 
+	displayScreen.textContent !== "-" && displayScreen.textContent !== "+"
+	&& displayScreen.textContent !== "/" ) {
 		currentInputs[currentInputs.length - 1] = displayScreen.textContent + input;
 		console.log(currentInputs);
 		console.log("maybe");
+
+	} else if (typeof input == 'number' && displayScreen.textContent == "=") {
+		clearArray();
+		currentInputs[0] = input;
+
 	} else if ((input === "x" || input === "=" || input === "/" 
 	|| input === "+" || input === "-") && (currentInputs[currentInputs.length - 1] === "x" || 
 	currentInputs[currentInputs.length - 1] === "=" || currentInputs[currentInputs.length - 1] === "-" 
 	|| currentInputs[currentInputs.length - 1] === "/" || currentInputs[currentInputs.length - 1] === "+")) {
 		currentInputs[currentInputs.length - 1] = input;
+
 	} else {
 		currentInputs.push(input);
 		console.log(currentInputs);
@@ -134,22 +147,25 @@ function addToArray(input) {
 //puts the solution to the previous math problem in the first slot of the currentInputs array
 //and deletes the 2nd and 3rd slots, effectivley starting a fresh array
 function suffleArray(input) {
-	if ((input === "x" || input === "=" || input === "/" 
+	if ((input === "x" || input === "/" 
 	|| input === "+" || input === "-") && (currentInputs[1] === "x" || 
 	currentInputs[1] === "=" || currentInputs[1] === "-" 
 	|| currentInputs[1] === "/" || currentInputs[1] === "+") && (currentInputs.length >= 3)) {
-		currentInputs[0] = displayScreen.textContent;
+		currentInputs[0] = displayScreen2.textContent;
 		currentInputs[1] = currentInputs[3];
 		currentInputs.splice(2);
 		currentInputs.splice(3);
 		console.log("shuffle");
-		console.log(currentInputs);
+		console.log(currentInputs); 
 	}
 }
 
+//If user types a special character then start with the answer in the first slot
+//if the user types a number then start with the new number in the first slot
+
 
 //clears the array back to only containing 0
-function clearArray(input) {
+function clearArray() {
 	currentInputs = [0];
 	console.log(currentInputs);
 }
