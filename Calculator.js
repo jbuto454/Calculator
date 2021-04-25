@@ -82,7 +82,8 @@ function changeDisplay(button) {
 	if (displayScreen.textContent !== "0" && typeof(button) === 'number' 
 	&& displayScreen.textContent !== "x" && displayScreen.textContent !== "="
 	&& displayScreen.textContent !== "-" && displayScreen.textContent !== "+"
-	&& displayScreen.textContent !== "/") {
+	&& displayScreen.textContent !== "/" && (currentInputs[1] !== "x" && 
+	currentInputs[1] !== "-" && currentInputs[1] !== "+" && currentInputs[1] !== "/")) {
 		displayScreen.textContent += button;
 	} else if ((button === "x" || button === "=" || button === "/" 
 	|| button === "+" || button === "-") && (currentInputs[1] === "x" || 
@@ -113,9 +114,11 @@ function addToArray(input) {
 	if (typeof input == 'number' && displayScreen.textContent !== "x" 
 	&& displayScreen.textContent !== "="
 	&& displayScreen.textContent !== "-" && displayScreen.textContent !== "+"
-	&& displayScreen.textContent !== "/") {
+	&& displayScreen.textContent !== "/" && (currentInputs[1] !== "x" && 
+	currentInputs[1] !== "-" && currentInputs[1] !== "+" && currentInputs[1] !== "/")) {
 		currentInputs[currentInputs.length - 1] = displayScreen.textContent + input;
 		console.log(currentInputs);
+		console.log("maybe");
 	} else if ((input === "x" || input === "=" || input === "/" 
 	|| input === "+" || input === "-") && (currentInputs[currentInputs.length - 1] === "x" || 
 	currentInputs[currentInputs.length - 1] === "=" || currentInputs[currentInputs.length - 1] === "-" 
@@ -124,6 +127,7 @@ function addToArray(input) {
 	} else {
 		currentInputs.push(input);
 		console.log(currentInputs);
+		console.log("want");
 	}
 }
 
@@ -135,8 +139,10 @@ function suffleArray(input) {
 	currentInputs[1] === "=" || currentInputs[1] === "-" 
 	|| currentInputs[1] === "/" || currentInputs[1] === "+") && (currentInputs.length >= 3)) {
 		currentInputs[0] = displayScreen.textContent;
-		currentInputs.splice(1);
+		currentInputs[1] = currentInputs[3];
 		currentInputs.splice(2);
+		currentInputs.splice(3);
+		console.log("shuffle");
 		console.log(currentInputs);
 	}
 }
