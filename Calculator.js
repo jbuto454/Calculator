@@ -1,14 +1,14 @@
 
 //takes 2 numbers and adds them
 function add (a,b) {
-	let solution = parseInt(a) + parseInt(b);
+	let solution = parseFloat(a) + parseFloat(b);
 	solution = Math.round(solution * 100) / 100;
 	return (solution);
 }
 
 //takes 2 numbers and subtracts them
 function subtract (a,b) {
-	let solution = parseInt(a) - parseInt(b);
+	let solution = parseFloat(a) - parseFloat(b);
 	solution = Math.round(solution * 100) / 100;
 	return (solution);
 }
