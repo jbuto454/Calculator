@@ -2,24 +2,28 @@
 //takes 2 numbers and adds them
 function add (a,b) {
 	let solution = parseInt(a) + parseInt(b);
+	solution = Math.round(solution * 100) / 100;
 	return (solution);
 }
 
 //takes 2 numbers and subtracts them
 function subtract (a,b) {
 	let solution = parseInt(a) - parseInt(b);
+	solution = Math.round(solution * 100) / 100;
 	return (solution);
 }
 
 //takes 2 numbers and mulitplies them
 function multiply1 (a,b) {
 	let solution = a * b;
+	solution = Math.round(solution * 100) / 100;
 	return (solution);
 }
 
 //takes 2 numbers and divides them
 function divide (a,b) {
 	let solution = a / b;
+	solution = Math.round(solution * 100) / 100;
 	return (solution);
 }
 
@@ -87,10 +91,10 @@ function changeDisplay(button) {
 	//This is the case where a number is displayed on the screen and the user
 	//enters in a second number. Both numbers are treated as strings and added together
 	//to form a larger number on the display
-	if (displayScreen.textContent !== "0" && typeof(button) === 'number' 
-	&& displayScreen.textContent !== "x" && displayScreen.textContent !== "="
+	if ((displayScreen.textContent !== "0" && displayScreen.textContent !== "x" 
+	&& displayScreen.textContent !== "="
 	&& displayScreen.textContent !== "-" && displayScreen.textContent !== "+"
-	&& displayScreen.textContent !== "/" ) {
+	&& displayScreen.textContent !== "/" ) && (typeof(button) === 'number' || button === ".")) {
 		displayScreen.textContent += button;
 
 	//This is the case where the user enters an operator and
@@ -140,10 +144,10 @@ function addToArray(input) {
 	//which is also treated as a string
 	//this forms a number with multiple digits and adds it to the array in place of the last value
 	//of the array 
-	if (typeof input == 'number' && displayScreen.textContent !== "x" 
+	if ((typeof input == 'number' || input == "." ) && (displayScreen.textContent !== "x" 
 	&& displayScreen.textContent !== "=" && 
 	displayScreen.textContent !== "-" && displayScreen.textContent !== "+"
-	&& displayScreen.textContent !== "/" ) {
+	&& displayScreen.textContent !== "/" )) {
 		currentInputs[currentInputs.length - 1] = displayScreen.textContent + input;
 		console.log(currentInputs);
 		console.log("maybe");
@@ -172,9 +176,15 @@ function addToArray(input) {
 	//enters an operator after entering a number), the new value that the user has entered
 	//is appended to the end of the array
 	} else {
+		if (typeof input == 'number') {
+			currentInputs.push(input.toString());
+			console.log(currentInputs);
+			console.log("this is a number");
+		} else {
 		currentInputs.push(input);
 		console.log(currentInputs);
 		console.log("want");
+		}
 	}
 }
 
@@ -204,9 +214,64 @@ function clearArray() {
 	console.log(currentInputs);
 }
 
+//Returns true if their is a decimal in the current slot of array
+function findDecimal() {
+	if(currentInputs[currentInputs.length - 1].includes(".")) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+// A function that disables the Decimal button
+function disableDecimalButton() {
+	document.getElementById("Decimal").disabled = true;
+  }
+
+// A function that activates the Decimal button
+function activateDecimalButton() {
+	document.getElementById("Decimal").disabled = false;
+  }
+
+//turns the decimal button on or off depending 
+//on how many decimals are in current array slot
+function checkDecimal() {
+	if (findDecimal()) {
+		disableDecimalButton();
+	} else {
+		activateDecimalButton();
+	}
+}
+
+//removes the last character the user added to the array
+//removes the last character the user added to the display screen
+function backSpace() {
+	let newString = currentInputs[currentInputs.length - 1].substring(0,currentInputs[currentInputs.length - 1].length - 1);
+	currentInputs[currentInputs.length - 1] = newString;
+	console.log(currentInputs);
+	let newDisplay = displayScreen.textContent.substring(0,displayScreen.textContent.length - 1);
+	displayScreen.textContent = newDisplay;
+	if (currentInputs[currentInputs.length - 1] == "") {
+		currentInputs.pop();
+		console.log("pop");
+		console.log(currentInputs);
+	}
+
+}
+
+//for the case where a user has execuated a operator by clicking the "=" sign
+//then types in a number
+//the decides to delete that number, and perform 
+//an operation on the answer from the previous problem
+function fixEmptyString() {
+	if (currentInputs.length == 0 || currentInputs[0] == "") {
+		currentInputs[0] = displayScreen2.textContent;
+	}
+	console.log("fix)");
+}
 
 //add event listeners that change the display on the calculator 
-//for each keyboard button
+//for each virtual button on the screen
 const btn1 = document.querySelector("#btn1");
 btn1.addEventListener('click', function() {addToArray(1);changeDisplay(1)});
 
@@ -237,6 +302,9 @@ btn9.addEventListener('click', function() {addToArray(9);changeDisplay(9);});
 const btn0 = document.querySelector("#btn0");
 btn0.addEventListener('click', function() {addToArray(0);changeDisplay(0);});
 
+const Decimal = document.querySelector("#Decimal");
+Decimal.addEventListener('click', function() {addToArray(".");changeDisplay(".");checkDecimal();});
+
 const Equal = document.querySelector("#Equal");
 Equal.addEventListener('click', function() {addToArray("=");changeDisplay("=");suffleArray("=")});
 
@@ -244,14 +312,17 @@ const clear = document.querySelector("#clear");
 clear.addEventListener('click', function() {clearArray();clearDisplay();});
 
 const Subtract = document.querySelector("#Subtract");
-Subtract.addEventListener('click', function() {addToArray("-");changeDisplay("-");suffleArray("-")});
+Subtract.addEventListener('click', function() {addToArray("-");changeDisplay("-");suffleArray("-");checkDecimal();});
 
 const Add = document.querySelector("#Add");
-Add.addEventListener('click', function() {addToArray("+");changeDisplay("+");suffleArray("+")});
+Add.addEventListener('click', function() {addToArray("+");changeDisplay("+");suffleArray("+");checkDecimal();});
 
 const Divide = document.querySelector("#Divide");
-Divide.addEventListener('click', function() {addToArray("/");changeDisplay("/");suffleArray("/")});
+Divide.addEventListener('click', function() {addToArray("/");changeDisplay("/");suffleArray("/");checkDecimal();});
 
 const Multiply = document.querySelector("#Multiply");
-Multiply.addEventListener('click', function() {addToArray("x");changeDisplay("x");suffleArray("x")});
+Multiply.addEventListener('click', function() {addToArray("x");changeDisplay("x");suffleArray("x");checkDecimal();});
+
+const Backspace = document.querySelector("#Backspace");
+Backspace.addEventListener('click', function() {backSpace();fixEmptyString();});
 
