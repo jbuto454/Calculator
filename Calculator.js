@@ -70,24 +70,34 @@ function operate(a,b,operator) {
     }
 }
 
-
-//querySelector for the display of the calculator
+//querySelector for the display of the calculator 
+//(displays the operators and numbers to be operated on)
 let displayScreen = document.querySelector("#Display");
 let initialDisplay = 0;
 displayScreen.textContent = initialDisplay;
 
+//querySelector for the display of the calculator (displays the answer)
 let displayScreen2 = document.querySelector("#Display2");
 let initialDisplay2 = ""
 
 //changes the display when a button is pushed
 function changeDisplay(button) {
 	console.log(typeof(button));
+
+	//This is the case where a number is displayed on the screen and the user
+	//enters in a second number. Both numbers are treated as strings and added together
+	//to form a larger number on the display
 	if (displayScreen.textContent !== "0" && typeof(button) === 'number' 
 	&& displayScreen.textContent !== "x" && displayScreen.textContent !== "="
 	&& displayScreen.textContent !== "-" && displayScreen.textContent !== "+"
 	&& displayScreen.textContent !== "/" ) {
 		displayScreen.textContent += button;
 
+	//This is the case where the user enters an operator and
+	//there are already 2 numbers and an operator stored in the array.
+	//This executes the operate function which solves the math problem
+	//and displayed the result on the answer screen.
+	//the last button the user pressed is displayed on the primary screen. 
 	} else if ((button === "x" || button === "=" || button === "/" 
 	|| button === "+" || button === "-") && (currentInputs[1] === "x" || 
 	currentInputs[1] === "=" || currentInputs[1] === "-" 
@@ -96,9 +106,13 @@ function changeDisplay(button) {
 		console.log(operate(currentInputs[0],currentInputs[2],currentInputs[1]));
 		displayScreen.textContent = button;
 
+	//In this case, the user enters an operator and the operator is displayed on the 
+	//main screen. 
 	} else if (typeof(button) !== 'number') {
 		displayScreen.textContent = button;
 
+	//In this case, the user enters a number and the previous value entered was an operator
+	//the number is displayed on the main screen. 
 	} else {
 		displayScreen.textContent = button;
 	}
@@ -119,6 +133,13 @@ function addToArray(input) {
 	console.log(typeof(input));
 	console.log(displayScreen.textContent);
 
+	//when a user types in a number and the last value typed in was not a operator 
+	//(i.e. it was a number)
+	//the number the user typed in is treated as a string and added 
+	//to the last value typed in (a number)
+	//which is also treated as a string
+	//this forms a number with multiple digits and adds it to the array in place of the last value
+	//of the array 
 	if (typeof input == 'number' && displayScreen.textContent !== "x" 
 	&& displayScreen.textContent !== "=" && 
 	displayScreen.textContent !== "-" && displayScreen.textContent !== "+"
@@ -127,16 +148,29 @@ function addToArray(input) {
 		console.log(currentInputs);
 		console.log("maybe");
 
+	//After a user has entered the "="" key and is shown a solution to the math problem
+	//If the user enters a number, I am assuming that they want to start a new 
+	//calculation, so the array is cleared and then the new number is added as
+	//the first value in the array
 	} else if (typeof input == 'number' && displayScreen.textContent == "=") {
 		clearArray();
 		currentInputs[0] = input;
 
+	//When the user enters an operator and the last value they entered was an operator as well
+	//I am assuming that the user wants to undo the previous operator and 
+	//replace it with the one they just entered
+	//the new operator takes the place of the old one in the array
 	} else if ((input === "x" || input === "=" || input === "/" 
 	|| input === "+" || input === "-") && (currentInputs[currentInputs.length - 1] === "x" || 
 	currentInputs[currentInputs.length - 1] === "=" || currentInputs[currentInputs.length - 1] === "-" 
 	|| currentInputs[currentInputs.length - 1] === "/" || currentInputs[currentInputs.length - 1] === "+")) {
 		currentInputs[currentInputs.length - 1] = input;
+		console.log("after the =");
 
+
+	//In all other cases (if a user enters a number after entering an operator or
+	//enters an operator after entering a number), the new value that the user has entered
+	//is appended to the end of the array
 	} else {
 		currentInputs.push(input);
 		console.log(currentInputs);
@@ -144,8 +178,11 @@ function addToArray(input) {
 	}
 }
 
+//executes after 2 numbers have been evaluated and the user inputs
+//another operator to start a new problem (besides the "=" operator)
 //puts the solution to the previous math problem in the first slot of the currentInputs array
-//and deletes the 2nd and 3rd slots, effectivley starting a fresh array
+//puts the operator the user just entered into the second slot
+//and deletes the 3rd and 4th slots, effectivley starting a fresh array
 function suffleArray(input) {
 	if ((input === "x" || input === "/" 
 	|| input === "+" || input === "-") && (currentInputs[1] === "x" || 
@@ -159,9 +196,6 @@ function suffleArray(input) {
 		console.log(currentInputs); 
 	}
 }
-
-//If user types a special character then start with the answer in the first slot
-//if the user types a number then start with the new number in the first slot
 
 
 //clears the array back to only containing 0
