@@ -223,6 +223,27 @@ function findDecimal() {
 	}
 }
 
+
+// A function that disables the Backspace button
+function disableBackButton() {
+	document.getElementById("Backspace").disabled = true;
+  }
+
+// A function that activates the Backspace button
+function activateBackButton() {
+	document.getElementById("Backspace").disabled = false;
+  }
+
+//turns the Backspace button on or off depending 
+//on if the "=" sign is in the display
+function checkEqualSign() {
+	if (displayScreen.textContent == "=") {
+		disableBackButton();
+	} else {
+		activateBackButton();
+	}
+}
+
 // A function that disables the Decimal button
 function disableDecimalButton() {
 	document.getElementById("Decimal").disabled = true;
@@ -273,55 +294,55 @@ function fixEmptyString() {
 //add event listeners that change the display on the calculator 
 //for each virtual button on the screen
 const btn1 = document.querySelector("#btn1");
-btn1.addEventListener('click', function() {addToArray(1);changeDisplay(1)});
+btn1.addEventListener('click', function() {addToArray(1);changeDisplay(1);checkEqualSign();});
 
 const btn2 = document.querySelector("#btn2");
-btn2.addEventListener('click', function() {addToArray(2);changeDisplay(2);});
+btn2.addEventListener('click', function() {addToArray(2);changeDisplay(2);checkEqualSign();});
 
 const btn3 = document.querySelector("#btn3");
-btn3.addEventListener('click', function() {addToArray(3);changeDisplay(3);});
+btn3.addEventListener('click', function() {addToArray(3);changeDisplay(3);checkEqualSign();});
 
 const btn4 = document.querySelector("#btn4");
-btn4.addEventListener('click', function() {addToArray(4);changeDisplay(4);});
+btn4.addEventListener('click', function() {addToArray(4);changeDisplay(4);checkEqualSign();});
 
 const btn5 = document.querySelector("#btn5");
-btn5.addEventListener('click', function() {addToArray(5);changeDisplay(5);});
+btn5.addEventListener('click', function() {addToArray(5);changeDisplay(5);checkEqualSign();});
 
 const btn6 = document.querySelector("#btn6");
-btn6.addEventListener('click', function() {addToArray(6);changeDisplay(6);});
+btn6.addEventListener('click', function() {addToArray(6);changeDisplay(6);checkEqualSign();});
 
 const btn7 = document.querySelector("#btn7");
-btn7.addEventListener('click', function() {addToArray(7);changeDisplay(7);});
+btn7.addEventListener('click', function() {addToArray(7);changeDisplay(7);checkEqualSign();});
 
 const btn8 = document.querySelector("#btn8");
-btn8.addEventListener('click', function() {addToArray(8);changeDisplay(8);});
+btn8.addEventListener('click', function() {addToArray(8);changeDisplay(8);checkEqualSign();});
 
 const btn9 = document.querySelector("#btn9");
-btn9.addEventListener('click', function() {addToArray(9);changeDisplay(9);});
+btn9.addEventListener('click', function() {addToArray(9);changeDisplay(9);checkEqualSign();});
 
 const btn0 = document.querySelector("#btn0");
-btn0.addEventListener('click', function() {addToArray(0);changeDisplay(0);});
+btn0.addEventListener('click', function() {addToArray(0);changeDisplay(0);checkEqualSign();});
 
 const Decimal = document.querySelector("#Decimal");
-Decimal.addEventListener('click', function() {addToArray(".");changeDisplay(".");checkDecimal();});
+Decimal.addEventListener('click', function() {addToArray(".");changeDisplay(".");checkDecimal();checkEqualSign();});
 
 const Equal = document.querySelector("#Equal");
-Equal.addEventListener('click', function() {addToArray("=");changeDisplay("=");suffleArray("=")});
+Equal.addEventListener('click', function() {addToArray("=");changeDisplay("=");suffleArray("=");checkEqualSign();});
 
 const clear = document.querySelector("#clear");
 clear.addEventListener('click', function() {clearArray();clearDisplay();});
 
 const Subtract = document.querySelector("#Subtract");
-Subtract.addEventListener('click', function() {addToArray("-");changeDisplay("-");suffleArray("-");checkDecimal();});
+Subtract.addEventListener('click', function() {addToArray("-");changeDisplay("-");suffleArray("-");checkDecimal();checkEqualSign();});
 
 const Add = document.querySelector("#Add");
-Add.addEventListener('click', function() {addToArray("+");changeDisplay("+");suffleArray("+");checkDecimal();});
+Add.addEventListener('click', function() {addToArray("+");changeDisplay("+");suffleArray("+");checkDecimal();checkEqualSign();});
 
 const Divide = document.querySelector("#Divide");
-Divide.addEventListener('click', function() {addToArray("/");changeDisplay("/");suffleArray("/");checkDecimal();});
+Divide.addEventListener('click', function() {addToArray("/");changeDisplay("/");suffleArray("/");checkDecimal();checkEqualSign();});
 
 const Multiply = document.querySelector("#Multiply");
-Multiply.addEventListener('click', function() {addToArray("x");changeDisplay("x");suffleArray("x");checkDecimal();});
+Multiply.addEventListener('click', function() {addToArray("x");changeDisplay("x");suffleArray("x");checkDecimal();checkEqualSign();});
 
 const Backspace = document.querySelector("#Backspace");
 Backspace.addEventListener('click', function() {backSpace();fixEmptyString();});
