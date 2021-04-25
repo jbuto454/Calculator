@@ -4,7 +4,7 @@
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    width: 350px;
+    width: 400px;
     height: 500px;
     justify-content: center;
     margin-top: 5%;
@@ -26,6 +26,7 @@
     width: 90px;
     border-radius: 5px;
     margin-top: 2px;
+    font-size: 30px;
 }
 
 .button2 {
@@ -36,6 +37,7 @@
     color: black;
     border-radius: 5px;
     margin-top: 2px;
+    font-size: 30px;
 }
 
 .divs {
@@ -52,7 +54,7 @@
 
 .Box {
     height: 50px;
-    width: 175px;
+    width: 200px;
     background-color: rgb(192, 192, 192);
     margin-top: 10px;
     font-size: 35px;
@@ -65,7 +67,7 @@
 
 .Box2 {
     height: 40px;
-    width: 140px;
+    width: 180px;
     border-color: black;
     background-color:  rgb(192, 192, 192);
     margin-top: 10px;
