@@ -133,8 +133,6 @@ let currentInputs = [0];
 
 //store inputs into the curentInputs array
 function addToArray(input) {
-	console.log(input);
-	console.log(typeof(input));
 	console.log(displayScreen.textContent);
 
 	//when a user types in a number and the last value typed in was not a operator 
