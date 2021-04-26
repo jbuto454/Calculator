@@ -154,7 +154,7 @@ function addToArray(input) {
 	//If the user enters a number, I am assuming that they want to start a new 
 	//calculation, so the array is cleared and then the new number is added as
 	//the first value in the array
-	} else if (typeof input == 'number' && displayScreen.textContent == "=") {
+	} else if ((typeof input == 'number' || input == ".") && displayScreen.textContent == "=") {
 		clearArray();
 		currentInputs[0] = input;
 		console.log("2");
